@@ -1,60 +1,134 @@
 .userButton {
   display: flex;
   align-items: center;
-  gap: 16px;
+  gap: 12px;
   position: relative;
+  padding: 8px 12px;
+  border-radius: var(--radius-large);
+  transition: all var(--transition-medium);
+  cursor: pointer;
+}
+
+.userButton:hover {
+  background-color: var(--background-secondary);
+  box-shadow: var(--shadow-light);
 }
 
 .userButton img {
-  width: 36px;
-  height: 36px;
-  border: 100%;
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
   object-fit: cover;
+  border: 2px solid var(--border-light);
+  transition: all var(--transition-medium);
+}
+
+.userButton:hover img {
+  border-color: var(--primary-red);
+  box-shadow: 0 0 0 2px var(--primary-red-light);
 }
 
 .userButton .arrow {
   cursor: pointer;
-  width: 16px;
-  height: 16px;
+  width: 18px;
+  height: 18px;
+  transition: transform var(--transition-medium);
+}
+
+.userButton:hover .arrow {
+  transform: rotate(180deg);
 }
 
 .userOptions {
   position: absolute;
   right: 0;
-  top: 120%;
-  padding: 16px;
-  border-radius: 8px;
-  background-color: white;
+  top: calc(100% + 8px);
+  padding: 12px 0;
+  border-radius: var(--radius-medium);
+  background-color: var(--background-primary);
   z-index: 999;
   display: flex;
   flex-direction: column;
-  font-size: 14px;
-  box-shadow: 0px 0px 4px 1px rgba(0, 0, 0, 0.177);
+  font-size: 15px;
+  box-shadow: var(--shadow-heavy);
+  border: 1px solid var(--border-light);
+  min-width: 180px;
+  animation: slideDown 0.2s ease;
+}
+
+@keyframes slideDown {
+  from {
+    opacity: 0;
+    transform: translateY(-10px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
 }
 
 .userOption {
   cursor: pointer;
-  padding: 8px;
-  border-radius: 8px;
+  padding: 12px 20px;
+  transition: all var(--transition-fast);
+  font-weight: 500;
+  color: var(--text-primary);
 }
 
 .userOption:hover {
-  background-color: #f1f1f1;
-  color: gray;
+  background-color: var(--background-secondary);
+  color: var(--primary-red);
 }
 
 .loginLink {
-  font-size: 18px;
-  padding: 16px;
-  border-radius: 32px;
+  font-size: 16px;
+  font-weight: 600;
+  padding: 12px 24px;
+  border-radius: var(--radius-large);
+  background-color: var(--primary-red);
+  color: white;
+  transition: all var(--transition-medium);
+  box-shadow: var(--shadow-light);
 }
 
 .loginLink:hover {
-  background: #f1f1f1;
+  background-color: var(--primary-red-hover);
+  transform: translateY(-2px);
+  box-shadow: var(--shadow-medium);
+}
+
+.loginLink:active {
+  transform: translateY(0);
+  box-shadow: var(--shadow-light);
 }
 
 @media (max-width: 475px) {
   .userButton {
-    display: none;
+    gap: 8px;
+    padding: 6px 8px;
+  }
+  
+  .userButton img {
+    width: 32px;
+    height: 32px;
+  }
+  
+  .userButton .arrow {
+    width: 16px;
+    height: 16px;
+  }
+  
+  .userOptions {
+    min-width: 160px;
+    font-size: 14px;
+  }
+  
+  .userOption {
+    padding: 10px 16px;
+  }
+  
+  .loginLink {
+    font-size: 14px;
+    padding: 10px 20px;
   }
 }

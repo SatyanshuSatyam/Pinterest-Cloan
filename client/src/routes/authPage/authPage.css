@@ -1,65 +1,169 @@
-.authPage{
+.authPage {
   width: 100vw;
   height: 100vh;
   display: flex;
   align-items: center;
   justify-content: center;
+  background: linear-gradient(135deg, var(--background-primary) 0%, var(--background-secondary) 100%);
+  padding: 20px;
 }
 
-.authContainer{
+.authContainer {
   display: flex;
   flex-direction: column;
   align-items: center;
   justify-content: center;
-  gap: 32px;
-  padding: 32px;
-  border-radius: 32px;
-  box-shadow: 0px 0px 10px 0px rgba(0, 0, 0, 0.1);
+  gap: 28px;
+  padding: 40px;
+  border-radius: var(--radius-large);
+  box-shadow: var(--shadow-heavy);
+  background-color: var(--background-primary);
+  border: 1px solid var(--border-light);
+  max-width: 400px;
+  width: 100%;
+  animation: slideUp 0.6s ease;
 }
 
-.authContainer h1{
-  font-weight: 400;
+@keyframes slideUp {
+  from {
+    opacity: 0;
+    transform: translateY(30px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
 }
 
-.authContainer form{
+.authContainer h1 {
+  font-weight: 600;
+  font-size: 28px;
+  color: var(--text-primary);
+  text-align: center;
+  margin-bottom: 8px;
+}
+
+.authContainer form {
   width: 100%;
   display: flex;
   flex-direction: column;
-  gap: 16px;
+  gap: 20px;
 }
 
-.formGroup{
+.formGroup {
   display: flex;
   flex-direction: column;
-  gap: 8px;
+  gap: 6px;
 }
 
-.formGroup label{
-  font-size: 14px;
+.formGroup label {
+  font-size: 13px;
+  font-weight: 600;
+  color: var(--text-secondary);
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
 }
 
-.formGroup input{
-  padding: 16px;
-  border: 2px solid #e0e0e0;
-  border-radius: 16px;
+.formGroup input {
+  padding: 16px 18px;
+  border: 2px solid var(--border-light);
+  border-radius: var(--radius-medium);
+  font-size: 16px;
+  transition: all var(--transition-medium);
+  background-color: var(--background-primary);
+  color: var(--text-primary);
 }
 
-.authContainer button{
-  background-color: #e50829;
-  padding: 16px;
+.formGroup input:focus {
+  border-color: var(--primary-red);
+  box-shadow: 0 0 0 3px var(--primary-red-light);
+  transform: translateY(-1px);
+}
+
+.formGroup input::placeholder {
+  color: var(--text-muted);
+}
+
+.authContainer button {
+  background-color: var(--primary-red);
+  padding: 16px 24px;
   border: none;
-  border-radius: 32px;
+  border-radius: var(--radius-large);
   color: white;
   cursor: pointer;
-  font-weight: bold;
+  font-weight: 600;
+  font-size: 16px;
+  transition: all var(--transition-medium);
+  box-shadow: var(--shadow-light);
+  margin-top: 8px;
+}
+
+.authContainer button:hover {
+  background-color: var(--primary-red-hover);
+  transform: translateY(-2px);
+  box-shadow: var(--shadow-medium);
+}
+
+.authContainer button:active {
+  transform: translateY(0);
+  box-shadow: var(--shadow-light);
 }
 
 .authContainer p {
-  font-size: 14px;
+  font-size: 15px;
   text-align: center;
   cursor: pointer;
+  color: var(--text-secondary);
+  transition: color var(--transition-fast);
 }
 
-.error{
-  color: #e50829;
+.authContainer p:hover {
+  color: var(--primary-red);
+}
+
+.authContainer p b {
+  color: var(--primary-red);
+  font-weight: 600;
+}
+
+.error {
+  color: var(--primary-red);
+  font-size: 14px;
+  text-align: center;
+  padding: 12px;
+  background-color: var(--primary-red-light);
+  border-radius: var(--radius-small);
+  border: 1px solid var(--primary-red);
+  animation: shake 0.5s ease;
+}
+
+@keyframes shake {
+  0%, 100% { transform: translateX(0); }
+  25% { transform: translateX(-5px); }
+  75% { transform: translateX(5px); }
+}
+
+@media (max-width: 480px) {
+  .authPage {
+    padding: 16px;
+  }
+  
+  .authContainer {
+    padding: 32px 24px;
+    gap: 24px;
+  }
+  
+  .authContainer h1 {
+    font-size: 24px;
+  }
+  
+  .formGroup input {
+    padding: 14px 16px;
+    font-size: 15px;
+  }
+  
+  .authContainer button {
+    padding: 14px 20px;
+    font-size: 15px;
+  }
 }
