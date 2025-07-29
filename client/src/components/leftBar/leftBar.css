@@ -7,17 +7,35 @@
   height: 100vh;
   position: sticky;
   top: 0;
-  padding: 20px 0;
-  background-color: var(--background-primary);
+  padding: var(--space-6) 0;
+  background: var(--background-glass);
+  backdrop-filter: blur(20px);
   border-right: 1px solid var(--border-light);
   z-index: 100;
+  transition: all var(--transition-normal);
+}
+
+.leftBar::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: linear-gradient(
+    180deg,
+    var(--background-primary) 0%,
+    rgba(255, 255, 255, 0.98) 50%,
+    var(--background-primary) 100%
+  );
+  z-index: -1;
 }
 
 .menuIcons {
   display: flex;
   flex-direction: column;
   align-items: center;
-  gap: 8px;
+  gap: var(--space-2);
 }
 
 .menuIcon {
@@ -26,56 +44,135 @@
   display: flex;
   align-items: center;
   justify-content: center;
-  border-radius: var(--radius-large);
-  transition: all var(--transition-medium);
+  border-radius: var(--radius-xl);
+  transition: all var(--transition-bounce);
   position: relative;
   overflow: hidden;
+  background: transparent;
+}
+
+.menuIcon::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: radial-gradient(
+    circle at center,
+    var(--primary-red-light) 0%,
+    transparent 70%
+  );
+  opacity: 0;
+  transition: opacity var(--transition-normal);
+  z-index: -1;
+}
+
+.menuIcon:hover::before {
+  opacity: 1;
 }
 
 .menuIcon:hover {
   background-color: var(--background-secondary);
-  transform: translateY(-2px);
-  box-shadow: var(--shadow-light);
+  transform: translateY(-3px) scale(1.05);
+  box-shadow: var(--shadow-md);
 }
 
 .menuIcon:active {
-  transform: translateY(0);
-  box-shadow: none;
+  transform: translateY(-1px) scale(1.02);
+  box-shadow: var(--shadow-sm);
 }
 
 .menuIcon img {
   width: 24px;
   height: 24px;
-  transition: transform var(--transition-fast);
+  transition: all var(--transition-normal);
+  filter: drop-shadow(0 1px 2px rgba(0, 0, 0, 0.1));
 }
 
 .menuIcon:hover img {
   transform: scale(1.1);
+  filter: drop-shadow(0 2px 4px rgba(0, 0, 0, 0.15));
 }
 
 .logo {
   width: 32px !important;
   height: 32px !important;
-  filter: drop-shadow(0 2px 4px rgba(230, 0, 35, 0.2));
+  filter: drop-shadow(0 2px 8px rgba(230, 0, 35, 0.3));
 }
 
 .menuIcon:first-child {
-  margin-bottom: 16px;
+  margin-bottom: var(--space-4);
+  background: linear-gradient(
+    135deg,
+    var(--primary-red-light) 0%,
+    rgba(255, 255, 255, 0.8) 100%
+  );
+  border: 1px solid var(--primary-red-light);
 }
 
 .menuIcon:first-child:hover {
-  background-color: var(--primary-red-light);
+  background: linear-gradient(
+    135deg,
+    var(--primary-red-light) 0%,
+    rgba(255, 255, 255, 0.9) 100%
+  );
+  border-color: var(--primary-red);
+  box-shadow: var(--shadow-colored);
 }
 
-@media (max-width: 768px) {
+.menuIcon:first-child::after {
+  content: '';
+  position: absolute;
+  top: -2px;
+  left: -2px;
+  right: -2px;
+  bottom: -2px;
+  background: linear-gradient(
+    45deg,
+    var(--primary-red),
+    var(--primary-red-hover),
+    var(--primary-red)
+  );
+  border-radius: var(--radius-xl);
+  opacity: 0;
+  z-index: -2;
+  transition: opacity var(--transition-normal);
+}
+
+.menuIcon:first-child:hover::after {
+  opacity: 0.1;
+}
+
+/* Enhanced hover effects for menu items */
+.menuIcon:not(:first-child):hover {
+  background: linear-gradient(
+    135deg,
+    var(--background-secondary) 0%,
+    var(--background-tertiary) 100%
+  );
+}
+
+/* Active state indicator */
+.menuIcon.active {
+  background: var(--primary-red-light);
+  border: 1px solid var(--primary-red);
+}
+
+.menuIcon.active img {
+  filter: brightness(0) saturate(100%) invert(13%) sepia(94%) saturate(7151%) hue-rotate(356deg) brightness(91%) contrast(118%);
+}
+
+/* Responsive design */
+@media (max-width: 1024px) {
   .leftBar {
-    width: 70px;
-    padding: 16px 0;
+    width: 72px;
+    padding: var(--space-5) 0;
   }
   
   .menuIcon {
-    width: 50px;
-    height: 50px;
+    width: 52px;
+    height: 52px;
   }
   
   .menuIcon img {
@@ -84,20 +181,20 @@
   }
   
   .logo {
-    width: 28px !important;
-    height: 28px !important;
+    width: 30px !important;
+    height: 30px !important;
   }
 }
 
-@media (max-width: 480px) {
+@media (max-width: 768px) {
   .leftBar {
-    width: 60px;
-    padding: 12px 0;
+    width: 64px;
+    padding: var(--space-4) 0;
   }
   
   .menuIcon {
-    width: 44px;
-    height: 44px;
+    width: 48px;
+    height: 48px;
   }
   
   .menuIcon img {
@@ -106,7 +203,72 @@
   }
   
   .logo {
+    width: 28px !important;
+    height: 28px !important;
+  }
+  
+  .menuIcon:hover {
+    transform: translateY(-2px) scale(1.03);
+  }
+}
+
+@media (max-width: 480px) {
+  .leftBar {
+    width: 56px;
+    padding: var(--space-3) 0;
+  }
+  
+  .menuIcon {
+    width: 44px;
+    height: 44px;
+    border-radius: var(--radius-lg);
+  }
+  
+  .menuIcon img {
+    width: 18px;
+    height: 18px;
+  }
+  
+  .logo {
     width: 24px !important;
     height: 24px !important;
+  }
+  
+  .menuIcon:first-child {
+    margin-bottom: var(--space-3);
+  }
+  
+  .menuIcons {
+    gap: var(--space-1);
+  }
+}
+
+/* Accessibility improvements */
+@media (prefers-reduced-motion: reduce) {
+  .menuIcon {
+    transition: background-color var(--transition-fast);
+  }
+  
+  .menuIcon:hover {
+    transform: none;
+  }
+  
+  .menuIcon img {
+    transition: none;
+  }
+}
+
+/* High contrast mode */
+@media (prefers-contrast: high) {
+  .leftBar {
+    border-right: 2px solid var(--text-primary);
+  }
+  
+  .menuIcon {
+    border: 1px solid var(--border-dark);
+  }
+  
+  .menuIcon:hover {
+    border-color: var(--text-primary);
   }
 }

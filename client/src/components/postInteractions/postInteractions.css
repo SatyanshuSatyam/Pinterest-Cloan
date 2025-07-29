@@ -2,17 +2,45 @@
   display: flex;
   align-items: center;
   justify-content: space-between;
-  padding: 20px;
-  background-color: var(--background-secondary);
-  border-radius: var(--radius-medium);
-  box-shadow: var(--shadow-light);
-  animation: slideIn 0.4s ease;
+  padding: var(--space-6);
+  background: linear-gradient(
+    135deg,
+    var(--background-secondary) 0%,
+    var(--background-tertiary) 100%
+  );
+  border-radius: var(--radius-lg);
+  box-shadow: var(--shadow-sm);
+  animation: slideIn 0.6s ease-out;
+  border: 1px solid var(--border-light);
+  position: relative;
+  overflow: hidden;
+}
+
+.postInteractions::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: linear-gradient(
+    135deg,
+    rgba(230, 0, 35, 0.05) 0%,
+    transparent 50%,
+    rgba(255, 255, 255, 0.1) 100%
+  );
+  opacity: 0;
+  transition: opacity var(--transition-normal);
+}
+
+.postInteractions:hover::before {
+  opacity: 1;
 }
 
 @keyframes slideIn {
   from {
     opacity: 0;
-    transform: translateX(-20px);
+    transform: translateX(-30px);
   }
   to {
     opacity: 1;
@@ -23,49 +51,90 @@
 .interactionIcons {
   display: flex;
   align-items: center;
-  gap: 16px;
-  font-weight: 600;
-  font-size: 15px;
+  gap: var(--space-5);
+  font-weight: var(--font-weight-semibold);
+  font-size: var(--font-size-base);
   color: var(--text-secondary);
 }
 
 .interactionIcons img, 
 .interactionIcons svg {
   cursor: pointer;
-  transition: all var(--transition-medium);
-  padding: 8px;
+  transition: all var(--transition-normal);
+  padding: var(--space-2);
   border-radius: 50%;
+  position: relative;
+}
+
+.interactionIcons img::before,
+.interactionIcons svg::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: radial-gradient(
+    circle at center,
+    var(--primary-red-light) 0%,
+    transparent 70%
+  );
+  opacity: 0;
+  transition: opacity var(--transition-fast);
+  border-radius: 50%;
+  z-index: -1;
+}
+
+.interactionIcons img:hover::before,
+.interactionIcons svg:hover::before {
+  opacity: 1;
 }
 
 .interactionIcons img:hover,
 .interactionIcons svg:hover {
-  background-color: var(--background-tertiary);
-  transform: scale(1.1);
+  background: var(--background-tertiary);
+  transform: scale(1.2) translateY(-2px);
+  box-shadow: var(--shadow-md);
 }
 
 .interactionIcons svg {
-  width: 36px;
-  height: 36px;
+  width: 40px;
+  height: 40px;
+  transition: all var(--transition-normal);
+}
+
+.interactionIcons svg:hover {
+  filter: drop-shadow(0 4px 8px rgba(230, 0, 35, 0.3));
 }
 
 .interactionIcons img {
   width: 20px;
   height: 20px;
+  filter: drop-shadow(0 1px 2px rgba(0, 0, 0, 0.1));
+}
+
+.interactionIcons img:hover {
+  filter: drop-shadow(0 2px 4px rgba(0, 0, 0, 0.2));
 }
 
 .postInteractions button {
-  background-color: var(--primary-red);
+  background: linear-gradient(
+    135deg,
+    var(--primary-red) 0%,
+    var(--primary-red-hover) 100%
+  );
   color: white;
   border: none;
-  border-radius: var(--radius-large);
-  padding: 14px 28px;
-  font-weight: 600;
-  font-size: 16px;
+  border-radius: var(--radius-2xl);
+  padding: var(--space-4) var(--space-8);
+  font-weight: var(--font-weight-semibold);
+  font-size: var(--font-size-lg);
   cursor: pointer;
-  transition: all var(--transition-medium);
-  box-shadow: var(--shadow-light);
+  transition: all var(--transition-normal);
+  box-shadow: var(--shadow-md);
   position: relative;
   overflow: hidden;
+  min-width: 120px;
 }
 
 .postInteractions button::before {
@@ -75,8 +144,13 @@
   left: -100%;
   width: 100%;
   height: 100%;
-  background: linear-gradient(90deg, transparent, rgba(255,255,255,0.2), transparent);
-  transition: left 0.5s;
+  background: linear-gradient(
+    90deg,
+    transparent,
+    rgba(255, 255, 255, 0.3),
+    transparent
+  );
+  transition: left 0.6s ease;
 }
 
 .postInteractions button:hover::before {
@@ -84,56 +158,85 @@
 }
 
 .postInteractions button:hover {
-  background-color: var(--primary-red-hover);
-  transform: translateY(-2px);
-  box-shadow: var(--shadow-medium);
+  background: linear-gradient(
+    135deg,
+    var(--primary-red-hover) 0%,
+    var(--primary-red-dark) 100%
+  );
+  transform: translateY(-3px) scale(1.05);
+  box-shadow: var(--shadow-colored);
 }
 
 .postInteractions button:active {
-  transform: translateY(0);
-  box-shadow: var(--shadow-light);
+  transform: translateY(-1px) scale(1.02);
+  box-shadow: var(--shadow-md);
 }
 
 .postInteractions button:disabled {
-  opacity: 0.7;
+  opacity: 0.6;
   cursor: not-allowed;
   transform: none;
 }
 
-@media (max-width: 768px) {
-  .postInteractions {
-    padding: 16px;
+.postInteractions button:disabled:hover {
+  background: linear-gradient(
+    135deg,
+    var(--primary-red) 0%,
+    var(--primary-red-hover) 100%
+  );
+  transform: none;
+  box-shadow: var(--shadow-md);
+}
+
+/* Saved state styling */
+.postInteractions button.saved {
+  background: linear-gradient(
+    135deg,
+    var(--text-secondary) 0%,
+    var(--text-muted) 100%
+  );
+}
+
+.postInteractions button.saved:hover {
+  background: linear-gradient(
+    135deg,
+    var(--text-muted) 0%,
+    var(--text-secondary) 100%
+  );
+}
+
+/* Like animation */
+.interactionIcons svg[data-liked="true"] {
+  animation: likeAnimation 0.6s cubic-bezier(0.68, -0.55, 0.265, 1.55);
+}
+
+@keyframes likeAnimation {
+  0% {
+    transform: scale(1);
   }
-  
-  .interactionIcons {
-    gap: 12px;
-    font-size: 14px;
+  50% {
+    transform: scale(1.3);
   }
-  
-  .interactionIcons svg {
-    width: 32px;
-    height: 32px;
-  }
-  
-  .postInteractions button {
-    padding: 12px 24px;
-    font-size: 15px;
+  100% {
+    transform: scale(1);
   }
 }
 
-@media (max-width: 480px) {
+/* Responsive design */
+@media (max-width: 768px) {
   .postInteractions {
-    padding: 14px;
+    padding: var(--space-4);
+    gap: var(--space-3);
   }
   
   .interactionIcons {
-    gap: 10px;
-    font-size: 13px;
+    gap: var(--space-3);
+    font-size: var(--font-size-sm);
   }
   
   .interactionIcons svg {
-    width: 28px;
-    height: 28px;
+    width: 36px;
+    height: 36px;
   }
   
   .interactionIcons img {
@@ -142,7 +245,121 @@
   }
   
   .postInteractions button {
-    padding: 10px 20px;
-    font-size: 14px;
+    padding: var(--space-3) var(--space-6);
+    font-size: var(--font-size-base);
+    min-width: 100px;
+  }
+}
+
+@media (max-width: 480px) {
+  .postInteractions {
+    padding: var(--space-3);
+    gap: var(--space-2);
+    flex-direction: column;
+    align-items: stretch;
+  }
+  
+  .interactionIcons {
+    gap: var(--space-2);
+    font-size: var(--font-size-xs);
+    justify-content: center;
+  }
+  
+  .interactionIcons svg {
+    width: 32px;
+    height: 32px;
+  }
+  
+  .interactionIcons img {
+    width: 16px;
+    height: 16px;
+  }
+  
+  .postInteractions button {
+    padding: var(--space-2) var(--space-4);
+    font-size: var(--font-size-sm);
+    min-width: auto;
+    width: 100%;
+  }
+  
+  .interactionIcons img:hover,
+  .interactionIcons svg:hover {
+    transform: scale(1.1);
+  }
+  
+  .postInteractions button:hover {
+    transform: translateY(-2px) scale(1.02);
+  }
+}
+
+/* Accessibility improvements */
+@media (prefers-reduced-motion: reduce) {
+  .postInteractions {
+    animation: none;
+  }
+  
+  .interactionIcons img,
+  .interactionIcons svg,
+  .postInteractions button {
+    transition: background-color var(--transition-fast), color var(--transition-fast);
+  }
+  
+  .interactionIcons img:hover,
+  .interactionIcons svg:hover,
+  .postInteractions button:hover {
+    transform: none;
+  }
+  
+  .postInteractions button::before {
+    display: none;
+  }
+  
+  .interactionIcons svg[data-liked="true"] {
+    animation: none;
+  }
+}
+
+/* High contrast mode */
+@media (prefers-contrast: high) {
+  .postInteractions {
+    border: 2px solid var(--border-dark);
+  }
+  
+  .postInteractions::before {
+    display: none;
+  }
+  
+  .interactionIcons img::before,
+  .interactionIcons svg::before {
+    display: none;
+  }
+  
+  .postInteractions button {
+    border: 2px solid var(--primary-red-dark);
+  }
+}
+
+/* Focus states */
+.interactionIcons img:focus-visible,
+.interactionIcons svg:focus-visible {
+  outline: 2px solid var(--primary-red);
+  outline-offset: 2px;
+}
+
+.postInteractions button:focus-visible {
+  outline: 2px solid var(--background-primary);
+  outline-offset: 2px;
+}
+
+/* Touch device optimizations */
+@media (hover: none) and (pointer: coarse) {
+  .interactionIcons img,
+  .interactionIcons svg {
+    padding: var(--space-3);
+  }
+  
+  .postInteractions button {
+    padding: var(--space-4) var(--space-6);
+    min-height: 48px;
   }
 }

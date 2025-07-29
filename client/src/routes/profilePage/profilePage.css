@@ -2,15 +2,32 @@
   display: flex;
   flex-direction: column;
   align-items: center;
-  gap: 24px;
-  padding: 40px 20px;
-  animation: fadeIn 0.6s ease;
+  gap: var(--space-8);
+  padding: var(--space-12) var(--space-6);
+  animation: fadeIn 0.8s ease-out;
+  position: relative;
+  min-height: 100vh;
+}
+
+.profilePage::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: 
+    radial-gradient(circle at 30% 20%, rgba(230, 0, 35, 0.03) 0%, transparent 50%),
+    radial-gradient(circle at 70% 80%, rgba(230, 0, 35, 0.02) 0%, transparent 50%),
+    radial-gradient(circle at 50% 50%, rgba(247, 247, 247, 0.5) 0%, transparent 70%);
+  pointer-events: none;
+  z-index: -1;
 }
 
 @keyframes fadeIn {
   from {
     opacity: 0;
-    transform: translateY(30px);
+    transform: translateY(40px);
   }
   to {
     opacity: 1;
@@ -22,41 +39,75 @@
   border-radius: 50%;
   object-fit: cover;
   border: 4px solid var(--border-light);
-  transition: all var(--transition-medium);
-  box-shadow: var(--shadow-medium);
-  animation: profileImageSlide 0.6s ease 0.2s both;
+  transition: all var(--transition-normal);
+  box-shadow: var(--shadow-lg);
+  animation: profileImageSlide 0.8s cubic-bezier(0.68, -0.55, 0.265, 1.55) 0.2s both;
+  position: relative;
+}
+
+.profileImg::before {
+  content: '';
+  position: absolute;
+  top: -8px;
+  left: -8px;
+  right: -8px;
+  bottom: -8px;
+  background: linear-gradient(
+    45deg,
+    var(--primary-red),
+    var(--primary-red-hover),
+    var(--primary-red),
+    var(--primary-red-light)
+  );
+  border-radius: 50%;
+  opacity: 0;
+  z-index: -1;
+  transition: opacity var(--transition-normal);
+}
+
+.profileImg:hover::before {
+  opacity: 0.3;
 }
 
 @keyframes profileImageSlide {
   from {
     opacity: 0;
-    transform: scale(0.8);
+    transform: scale(0.7) rotate(-10deg);
   }
   to {
     opacity: 1;
-    transform: scale(1);
+    transform: scale(1) rotate(0deg);
   }
 }
 
 .profileImg:hover {
   border-color: var(--primary-red);
-  transform: scale(1.05);
-  box-shadow: var(--shadow-heavy);
+  transform: scale(1.08) rotate(2deg);
+  box-shadow: var(--shadow-xl);
 }
 
 .profileName {
-  font-size: 32px;
-  font-weight: 700;
+  font-size: var(--font-size-4xl);
+  font-weight: var(--font-weight-bold);
   color: var(--text-primary);
   text-align: center;
-  margin-bottom: 4px;
-  animation: slideUp 0.6s ease 0.3s both;
+  margin-bottom: var(--space-1);
+  animation: slideUp 0.8s ease-out 0.3s both;
+  background: linear-gradient(
+    135deg,
+    var(--text-primary) 0%,
+    var(--primary-red) 100%
+  );
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+  line-height: var(--line-height-tight);
 }
 
 @keyframes slideUp {
   from {
     opacity: 0;
-    transform: translateY(20px);
+    transform: translateY(30px);
   }
   to {
     opacity: 1;
@@ -65,95 +116,156 @@
 }
 
 .profileUsername {
-  font-weight: 500;
-  font-size: 18px;
+  font-weight: var(--font-weight-medium);
+  font-size: var(--font-size-xl);
   color: var(--text-muted);
-  animation: slideUp 0.6s ease 0.4s both;
+  animation: slideUp 0.8s ease-out 0.4s both;
+  transition: color var(--transition-fast);
+}
+
+.profileUsername:hover {
+  color: var(--primary-red);
 }
 
 .followCounts {
-  font-weight: 600;
-  font-size: 16px;
+  font-weight: var(--font-weight-semibold);
+  font-size: var(--font-size-lg);
   color: var(--text-secondary);
   text-align: center;
-  padding: 16px 24px;
-  background-color: var(--background-secondary);
-  border-radius: var(--radius-large);
-  box-shadow: var(--shadow-light);
-  animation: slideUp 0.6s ease 0.5s both;
-}
-
-.profileInteractions {
-  display: flex;
-  align-items: center;
-  gap: 24px;
-  animation: slideUp 0.6s ease 0.6s both;
-}
-
-.profileInteractions > img {
-  cursor: pointer;
-  padding: 12px;
-  border-radius: 50%;
-  transition: all var(--transition-medium);
-  width: 44px;
-  height: 44px;
-}
-
-.profileInteractions > img:hover {
-  background-color: var(--background-secondary);
-  transform: scale(1.1);
-  box-shadow: var(--shadow-light);
-}
-
-.profileButtons {
-  display: flex;
-  gap: 12px;
-}
-
-.profileButtons button {
-  border: none;
-  padding: 14px 24px;
-  border-radius: var(--radius-large);
-  font-weight: 600;
-  font-size: 16px;
-  cursor: pointer;
-  transition: all var(--transition-medium);
-  box-shadow: var(--shadow-light);
-}
-
-.profileButtons button:first-child {
-  background-color: var(--background-secondary);
-  color: var(--text-primary);
-  border: 2px solid var(--border-light);
-}
-
-.profileButtons button:first-child:hover {
-  background-color: var(--background-tertiary);
-  border-color: var(--border-medium);
-  transform: translateY(-2px);
-  box-shadow: var(--shadow-medium);
-}
-
-.profileButtons button:last-child {
-  background-color: var(--primary-red);
-  color: white;
+  padding: var(--space-5) var(--space-8);
+  background: linear-gradient(
+    135deg,
+    var(--background-secondary) 0%,
+    var(--background-tertiary) 100%
+  );
+  border-radius: var(--radius-2xl);
+  box-shadow: var(--shadow-sm);
+  animation: slideUp 0.8s ease-out 0.5s both;
+  border: 1px solid var(--border-light);
+  transition: all var(--transition-normal);
   position: relative;
   overflow: hidden;
 }
 
-.profileButtons button:last-child::before {
+.followCounts::before {
   content: '';
   position: absolute;
   top: 0;
   left: -100%;
   width: 100%;
   height: 100%;
-  background: linear-gradient(90deg, transparent, rgba(255,255,255,0.2), transparent);
-  transition: left 0.5s;
+  background: linear-gradient(
+    90deg,
+    transparent,
+    rgba(230, 0, 35, 0.1),
+    transparent
+  );
+  transition: left var(--transition-normal);
 }
 
-.profileButtons button:last-child:hover::before {
+.followCounts:hover::before {
   left: 100%;
+}
+
+.followCounts:hover {
+  transform: translateY(-2px);
+  box-shadow: var(--shadow-md);
+  border-color: var(--primary-red-light);
+}
+
+.profileInteractions {
+  display: flex;
+  align-items: center;
+  gap: var(--space-8);
+  animation: slideUp 0.8s ease-out 0.6s both;
+}
+
+.profileInteractions > img {
+  cursor: pointer;
+  padding: var(--space-3);
+  border-radius: 50%;
+  transition: all var(--transition-normal);
+  width: 48px;
+  height: 48px;
+  background: var(--background-secondary);
+  border: 1px solid var(--border-light);
+  box-shadow: var(--shadow-xs);
+}
+
+.profileInteractions > img:hover {
+  background: var(--primary-red-light);
+  transform: scale(1.15) rotate(5deg);
+  box-shadow: var(--shadow-md);
+  border-color: var(--primary-red);
+}
+
+.profileButtons {
+  display: flex;
+  gap: var(--space-3);
+}
+
+.profileButtons button {
+  border: none;
+  padding: var(--space-4) var(--space-8);
+  border-radius: var(--radius-2xl);
+  font-weight: var(--font-weight-semibold);
+  font-size: var(--font-size-lg);
+  cursor: pointer;
+  transition: all var(--transition-normal);
+  box-shadow: var(--shadow-sm);
+  position: relative;
+  overflow: hidden;
+  min-width: 120px;
+}
+
+.profileButtons button::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: -100%;
+  width: 100%;
+  height: 100%;
+  background: linear-gradient(
+    90deg,
+    transparent,
+    rgba(255, 255, 255, 0.3),
+    transparent
+  );
+  transition: left 0.6s ease;
+}
+
+.profileButtons button:hover::before {
+  left: 100%;
+}
+
+.profileButtons button:first-child {
+  background: linear-gradient(
+    135deg,
+    var(--background-secondary) 0%,
+    var(--background-tertiary) 100%
+  );
+  color: var(--text-primary);
+  border: 2px solid var(--border-light);
+}
+
+.profileButtons button:first-child:hover {
+  background: linear-gradient(
+    135deg,
+    var(--background-tertiary) 0%,
+    var(--background-secondary) 100%
+  );
+  border-color: var(--border-medium);
+  transform: translateY(-3px);
+  box-shadow: var(--shadow-md);
+}
+
+.profileButtons button:last-child {
+  background: linear-gradient(
+    135deg,
+    var(--primary-red) 0%,
+    var(--primary-red-hover) 100%
+  );
+  color: white;
 }
 
 .profileButtons button:last-child:disabled {
@@ -162,158 +274,357 @@
   transform: none;
 }
 
-.profileButtons button:last-child:hover {
-  background-color: var(--primary-red-hover);
-  transform: translateY(-2px);
-  box-shadow: var(--shadow-medium);
+.profileButtons button:last-child:hover:not(:disabled) {
+  background: linear-gradient(
+    135deg,
+    var(--primary-red-hover) 0%,
+    var(--primary-red-dark) 100%
+  );
+  transform: translateY(-3px);
+  box-shadow: var(--shadow-colored);
 }
 
 .profileButtons button:last-child:disabled:hover {
-  background-color: var(--primary-red);
+  background: linear-gradient(
+    135deg,
+    var(--primary-red) 0%,
+    var(--primary-red-hover) 100%
+  );
   transform: none;
-  box-shadow: var(--shadow-light);
+  box-shadow: var(--shadow-sm);
 }
 
 .profileOptions {
   display: flex;
-  gap: 40px;
-  margin-top: 40px;
-  margin-bottom: 32px;
-  font-weight: 600;
-  font-size: 18px;
-  animation: slideUp 0.6s ease 0.7s both;
+  gap: var(--space-12);
+  margin-top: var(--space-12);
+  margin-bottom: var(--space-10);
+  font-weight: var(--font-weight-semibold);
+  font-size: var(--font-size-xl);
+  animation: slideUp 0.8s ease-out 0.7s both;
+  position: relative;
+}
+
+.profileOptions::before {
+  content: '';
+  position: absolute;
+  bottom: -4px;
+  left: 0;
+  right: 0;
+  height: 1px;
+  background: var(--border-light);
 }
 
 .profileOptions span {
   cursor: pointer;
-  padding: 12px 0;
-  transition: all var(--transition-medium);
+  padding: var(--space-4) 0;
+  transition: all var(--transition-normal);
   color: var(--text-muted);
   position: relative;
+  user-select: none;
 }
 
 .profileOptions span::after {
   content: '';
   position: absolute;
-  bottom: 0;
+  bottom: -4px;
   left: 0;
   width: 0;
   height: 3px;
-  background-color: var(--primary-red);
-  transition: width var(--transition-medium);
-  border-radius: var(--radius-small);
+  background: linear-gradient(
+    90deg,
+    var(--primary-red) 0%,
+    var(--primary-red-hover) 100%
+  );
+  transition: width var(--transition-normal);
+  border-radius: var(--radius-sm);
 }
 
 .profileOptions span:hover {
   color: var(--text-secondary);
+  transform: translateY(-2px);
 }
 
 .profileOptions span:hover::after {
   width: 100%;
 }
 
-.active {
+.profileOptions span.active {
   color: var(--text-primary) !important;
+  transform: translateY(-2px);
 }
 
-.active::after {
+.profileOptions span.active::after {
   width: 100% !important;
+  box-shadow: 0 0 8px var(--primary-red-light);
+}
+
+/* Profile content area */
+.profileContent {
+  width: 100%;
+  animation: slideUp 0.8s ease-out 0.8s both;
+}
+
+/* Responsive design */
+@media (max-width: 1024px) {
+  .profilePage {
+    padding: var(--space-10) var(--space-4);
+    gap: var(--space-6);
+  }
+  
+  .profileName {
+    font-size: var(--font-size-3xl);
+  }
+  
+  .profileUsername {
+    font-size: var(--font-size-lg);
+  }
+  
+  .followCounts {
+    font-size: var(--font-size-base);
+    padding: var(--space-4) var(--space-6);
+  }
+  
+  .profileInteractions {
+    gap: var(--space-6);
+  }
+  
+  .profileInteractions > img {
+    width: 44px;
+    height: 44px;
+    padding: var(--space-2);
+  }
+  
+  .profileButtons button {
+    padding: var(--space-3) var(--space-6);
+    font-size: var(--font-size-base);
+    min-width: 100px;
+  }
+  
+  .profileOptions {
+    gap: var(--space-8);
+    margin-top: var(--space-8);
+    margin-bottom: var(--space-6);
+    font-size: var(--font-size-lg);
+  }
+  
+  .profileOptions span {
+    padding: var(--space-3) 0;
+  }
 }
 
 @media (max-width: 768px) {
   .profilePage {
-    padding: 32px 16px;
-    gap: 20px;
+    padding: var(--space-8) var(--space-3);
+    gap: var(--space-5);
   }
   
   .profileName {
-    font-size: 28px;
+    font-size: var(--font-size-2xl);
   }
   
   .profileUsername {
-    font-size: 16px;
+    font-size: var(--font-size-base);
   }
   
   .followCounts {
-    font-size: 15px;
-    padding: 14px 20px;
+    font-size: var(--font-size-sm);
+    padding: var(--space-3) var(--space-5);
   }
   
   .profileInteractions {
-    gap: 20px;
-  }
-  
-  .profileInteractions > img {
-    width: 40px;
-    height: 40px;
-    padding: 10px;
-  }
-  
-  .profileButtons button {
-    padding: 12px 20px;
-    font-size: 15px;
-  }
-  
-  .profileOptions {
-    gap: 32px;
-    margin-top: 32px;
-    margin-bottom: 24px;
-    font-size: 16px;
-  }
-  
-  .profileOptions span {
-    padding: 10px 0;
-  }
-}
-
-@media (max-width: 480px) {
-  .profilePage {
-    padding: 24px 12px;
-    gap: 16px;
-  }
-  
-  .profileName {
-    font-size: 24px;
-  }
-  
-  .profileUsername {
-    font-size: 15px;
-  }
-  
-  .followCounts {
-    font-size: 14px;
-    padding: 12px 16px;
-  }
-  
-  .profileInteractions {
-    gap: 16px;
+    gap: var(--space-5);
     flex-wrap: wrap;
     justify-content: center;
   }
   
   .profileInteractions > img {
-    width: 36px;
-    height: 36px;
-    padding: 8px;
+    width: 40px;
+    height: 40px;
   }
   
   .profileButtons {
-    gap: 8px;
+    gap: var(--space-2);
   }
   
   .profileButtons button {
-    padding: 10px 16px;
-    font-size: 14px;
+    padding: var(--space-2) var(--space-5);
+    font-size: var(--font-size-sm);
+    min-width: 90px;
   }
   
   .profileOptions {
-    gap: 24px;
-    margin-top: 24px;
-    margin-bottom: 20px;
-    font-size: 15px;
+    gap: var(--space-6);
+    margin-top: var(--space-6);
+    margin-bottom: var(--space-5);
+    font-size: var(--font-size-base);
   }
   
   .profileOptions span {
-    padding: 8px 0;
+    padding: var(--space-2) 0;
+  }
+}
+
+@media (max-width: 480px) {
+  .profilePage {
+    padding: var(--space-6) var(--space-2);
+    gap: var(--space-4);
+  }
+  
+  .profileName {
+    font-size: var(--font-size-xl);
+  }
+  
+  .profileUsername {
+    font-size: var(--font-size-sm);
+  }
+  
+  .followCounts {
+    font-size: var(--font-size-xs);
+    padding: var(--space-2) var(--space-4);
+  }
+  
+  .profileInteractions {
+    gap: var(--space-4);
+    flex-direction: column;
+    align-items: center;
+  }
+  
+  .profileInteractions > img {
+    width: 36px;
+    height: 36px;
+  }
+  
+  .profileButtons {
+    gap: var(--space-2);
+    width: 100%;
+  }
+  
+  .profileButtons button {
+    padding: var(--space-2) var(--space-4);
+    font-size: var(--font-size-xs);
+    min-width: auto;
+    flex: 1;
+  }
+  
+  .profileOptions {
+    gap: var(--space-4);
+    margin-top: var(--space-5);
+    margin-bottom: var(--space-4);
+    font-size: var(--font-size-sm);
+  }
+  
+  .profileOptions span {
+    padding: var(--space-2) 0;
+  }
+  
+  .profileImg:hover,
+  .profileButtons button:first-child:hover,
+  .profileButtons button:last-child:hover:not(:disabled) {
+    transform: translateY(-2px);
+  }
+  
+  .profileOptions span:hover {
+    transform: translateY(-1px);
+  }
+}
+
+/* Accessibility improvements */
+@media (prefers-reduced-motion: reduce) {
+  .profilePage,
+  .profileImg,
+  .profileName,
+  .profileUsername,
+  .followCounts,
+  .profileInteractions,
+  .profileOptions,
+  .profileContent {
+    animation: none;
+  }
+  
+  .profileImg:hover,
+  .followCounts:hover,
+  .profileInteractions > img:hover,
+  .profileButtons button:hover,
+  .profileOptions span:hover {
+    transform: none;
+  }
+  
+  .profileImg::before,
+  .followCounts::before,
+  .profileButtons button::before {
+    display: none;
+  }
+}
+
+/* High contrast mode */
+@media (prefers-contrast: high) {
+  .profilePage::before {
+    display: none;
+  }
+  
+  .profileImg {
+    border: 4px solid var(--text-primary);
+  }
+  
+  .profileImg::before {
+    display: none;
+  }
+  
+  .followCounts {
+    border: 2px solid var(--border-dark);
+  }
+  
+  .profileInteractions > img {
+    border: 2px solid var(--border-dark);
+  }
+  
+  .profileButtons button:first-child {
+    border: 2px solid var(--text-primary);
+  }
+  
+  .profileButtons button:last-child {
+    border: 2px solid var(--primary-red-dark);
+  }
+  
+  .profileOptions::before {
+    background: var(--text-primary);
+  }
+}
+
+/* Focus states */
+.profileInteractions > img:focus-visible {
+  outline: 2px solid var(--primary-red);
+  outline-offset: 2px;
+}
+
+.profileButtons button:focus-visible {
+  outline: 2px solid var(--primary-red);
+  outline-offset: 2px;
+}
+
+.profileOptions span:focus-visible {
+  outline: 2px solid var(--primary-red);
+  outline-offset: 2px;
+}
+
+/* Loading states */
+.profilePage.loading {
+  opacity: 0.7;
+}
+
+.profilePage.loading .profileImg,
+.profilePage.loading .profileName,
+.profilePage.loading .followCounts {
+  animation: pulse 2s infinite;
+}
+
+/* Dark mode adjustments */
+@media (prefers-color-scheme: dark) {
+  .profilePage::before {
+    background: 
+      radial-gradient(circle at 30% 20%, rgba(230, 0, 35, 0.05) 0%, transparent 50%),
+      radial-gradient(circle at 70% 80%, rgba(230, 0, 35, 0.03) 0%, transparent 50%),
+      radial-gradient(circle at 50% 50%, rgba(26, 26, 26, 0.5) 0%, transparent 70%);
   }
 }

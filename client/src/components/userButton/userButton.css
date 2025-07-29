@@ -1,17 +1,42 @@
 .userButton {
   display: flex;
   align-items: center;
-  gap: 12px;
+  gap: var(--space-3);
   position: relative;
-  padding: 8px 12px;
-  border-radius: var(--radius-large);
-  transition: all var(--transition-medium);
+  padding: var(--space-2) var(--space-3);
+  border-radius: var(--radius-2xl);
+  transition: all var(--transition-normal);
   cursor: pointer;
+  background: transparent;
+  border: 1px solid transparent;
+}
+
+.userButton::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: linear-gradient(
+    135deg,
+    var(--background-secondary) 0%,
+    var(--background-tertiary) 100%
+  );
+  opacity: 0;
+  border-radius: var(--radius-2xl);
+  transition: opacity var(--transition-normal);
+  z-index: -1;
+}
+
+.userButton:hover::before {
+  opacity: 1;
 }
 
 .userButton:hover {
-  background-color: var(--background-secondary);
-  box-shadow: var(--shadow-light);
+  box-shadow: var(--shadow-md);
+  transform: translateY(-2px);
+  border-color: var(--border-light);
 }
 
 .userButton img {
@@ -20,97 +45,195 @@
   border-radius: 50%;
   object-fit: cover;
   border: 2px solid var(--border-light);
-  transition: all var(--transition-medium);
+  transition: all var(--transition-normal);
+  box-shadow: var(--shadow-sm);
 }
 
 .userButton:hover img {
   border-color: var(--primary-red);
-  box-shadow: 0 0 0 2px var(--primary-red-light);
+  box-shadow: 0 0 0 3px var(--primary-red-light), var(--shadow-md);
+  transform: scale(1.05);
 }
 
 .userButton .arrow {
   cursor: pointer;
   width: 18px;
   height: 18px;
-  transition: transform var(--transition-medium);
+  transition: all var(--transition-bounce);
+  opacity: 0.7;
+  filter: drop-shadow(0 1px 2px rgba(0, 0, 0, 0.1));
 }
 
 .userButton:hover .arrow {
-  transform: rotate(180deg);
+  transform: rotate(180deg) scale(1.1);
+  opacity: 1;
 }
 
 .userOptions {
   position: absolute;
   right: 0;
-  top: calc(100% + 8px);
-  padding: 12px 0;
-  border-radius: var(--radius-medium);
-  background-color: var(--background-primary);
+  top: calc(100% + var(--space-2));
+  padding: var(--space-3) 0;
+  border-radius: var(--radius-lg);
+  background: var(--background-primary);
   z-index: 999;
   display: flex;
   flex-direction: column;
-  font-size: 15px;
-  box-shadow: var(--shadow-heavy);
+  font-size: var(--font-size-sm);
+  box-shadow: var(--shadow-xl);
   border: 1px solid var(--border-light);
-  min-width: 180px;
-  animation: slideDown 0.2s ease;
+  min-width: 200px;
+  opacity: 0;
+  visibility: hidden;
+  transform: translateY(-10px) scale(0.95);
+  transition: all var(--transition-normal);
+  backdrop-filter: blur(20px);
+  overflow: hidden;
+}
+
+.userButton:hover .userOptions,
+.userOptions:hover {
+  opacity: 1;
+  visibility: visible;
+  transform: translateY(0) scale(1);
+  animation: slideDown 0.3s ease;
 }
 
 @keyframes slideDown {
-  from {
+  0% {
     opacity: 0;
-    transform: translateY(-10px);
+    transform: translateY(-15px) scale(0.9);
   }
-  to {
+  50% {
+    transform: translateY(2px) scale(1.02);
+  }
+  100% {
     opacity: 1;
-    transform: translateY(0);
+    transform: translateY(0) scale(1);
   }
+}
+
+.userOptions::before {
+  content: '';
+  position: absolute;
+  top: -8px;
+  right: 20px;
+  width: 0;
+  height: 0;
+  border-left: 8px solid transparent;
+  border-right: 8px solid transparent;
+  border-bottom: 8px solid var(--background-primary);
+  filter: drop-shadow(0 -2px 4px rgba(0, 0, 0, 0.1));
 }
 
 .userOption {
   cursor: pointer;
-  padding: 12px 20px;
+  padding: var(--space-3) var(--space-5);
   transition: all var(--transition-fast);
-  font-weight: 500;
+  font-weight: var(--font-weight-medium);
   color: var(--text-primary);
+  position: relative;
+  overflow: hidden;
+}
+
+.userOption::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: -100%;
+  width: 100%;
+  height: 100%;
+  background: linear-gradient(
+    90deg,
+    transparent,
+    var(--primary-red-light),
+    transparent
+  );
+  transition: left var(--transition-normal);
+}
+
+.userOption:hover::before {
+  left: 100%;
 }
 
 .userOption:hover {
-  background-color: var(--background-secondary);
+  background: linear-gradient(
+    135deg,
+    var(--primary-red-light) 0%,
+    var(--background-secondary) 100%
+  );
   color: var(--primary-red);
+  transform: translateX(4px);
+}
+
+.userOption:active {
+  transform: translateX(2px);
+  background: var(--primary-red-light);
 }
 
 .loginLink {
-  font-size: 16px;
-  font-weight: 600;
-  padding: 12px 24px;
-  border-radius: var(--radius-large);
-  background-color: var(--primary-red);
+  font-size: var(--font-size-base);
+  font-weight: var(--font-weight-semibold);
+  padding: var(--space-3) var(--space-6);
+  border-radius: var(--radius-2xl);
+  background: linear-gradient(
+    135deg,
+    var(--primary-red) 0%,
+    var(--primary-red-hover) 100%
+  );
   color: white;
-  transition: all var(--transition-medium);
-  box-shadow: var(--shadow-light);
+  transition: all var(--transition-normal);
+  box-shadow: var(--shadow-sm);
+  border: none;
+  position: relative;
+  overflow: hidden;
+}
+
+.loginLink::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: -100%;
+  width: 100%;
+  height: 100%;
+  background: linear-gradient(
+    90deg,
+    transparent,
+    rgba(255, 255, 255, 0.3),
+    transparent
+  );
+  transition: left 0.6s ease;
+}
+
+.loginLink:hover::before {
+  left: 100%;
 }
 
 .loginLink:hover {
-  background-color: var(--primary-red-hover);
-  transform: translateY(-2px);
-  box-shadow: var(--shadow-medium);
+  background: linear-gradient(
+    135deg,
+    var(--primary-red-hover) 0%,
+    var(--primary-red-dark) 100%
+  );
+  transform: translateY(-3px);
+  box-shadow: var(--shadow-colored);
 }
 
 .loginLink:active {
-  transform: translateY(0);
-  box-shadow: var(--shadow-light);
+  transform: translateY(-1px);
+  box-shadow: var(--shadow-md);
 }
 
-@media (max-width: 475px) {
+/* Responsive design */
+@media (max-width: 768px) {
   .userButton {
-    gap: 8px;
-    padding: 6px 8px;
+    gap: var(--space-2);
+    padding: var(--space-2);
   }
   
   .userButton img {
-    width: 32px;
-    height: 32px;
+    width: 36px;
+    height: 36px;
   }
   
   .userButton .arrow {
@@ -119,16 +242,123 @@
   }
   
   .userOptions {
-    min-width: 160px;
-    font-size: 14px;
+    min-width: 180px;
+    font-size: var(--font-size-xs);
   }
   
   .userOption {
-    padding: 10px 16px;
+    padding: var(--space-2) var(--space-4);
   }
   
   .loginLink {
-    font-size: 14px;
-    padding: 10px 20px;
+    font-size: var(--font-size-sm);
+    padding: var(--space-2) var(--space-5);
   }
+}
+
+@media (max-width: 480px) {
+  .userButton {
+    gap: var(--space-2);
+    padding: var(--space-1) var(--space-2);
+  }
+  
+  .userButton img {
+    width: 32px;
+    height: 32px;
+  }
+  
+  .userButton .arrow {
+    width: 14px;
+    height: 14px;
+  }
+  
+  .userOptions {
+    min-width: 160px;
+    font-size: var(--font-size-xs);
+    right: -10px;
+  }
+  
+  .userOptions::before {
+    right: 25px;
+  }
+  
+  .userOption {
+    padding: var(--space-2) var(--space-3);
+  }
+  
+  .loginLink {
+    font-size: var(--font-size-xs);
+    padding: var(--space-2) var(--space-4);
+  }
+  
+  .userButton:hover {
+    transform: translateY(-1px);
+  }
+}
+
+/* Accessibility improvements */
+@media (prefers-reduced-motion: reduce) {
+  .userButton,
+  .userButton img,
+  .userButton .arrow,
+  .userOptions,
+  .userOption,
+  .loginLink {
+    transition: background-color var(--transition-fast), color var(--transition-fast);
+  }
+  
+  .userButton:hover,
+  .loginLink:hover {
+    transform: none;
+  }
+  
+  .userButton:hover .arrow {
+    transform: rotate(180deg);
+  }
+  
+  .userOptions {
+    animation: none;
+  }
+  
+  .userOption::before,
+  .loginLink::before {
+    display: none;
+  }
+}
+
+/* High contrast mode */
+@media (prefers-contrast: high) {
+  .userButton {
+    border: 1px solid var(--border-dark);
+  }
+  
+  .userButton:hover {
+    border-color: var(--text-primary);
+  }
+  
+  .userOptions {
+    border: 2px solid var(--text-primary);
+  }
+  
+  .loginLink {
+    border: 2px solid var(--primary-red-dark);
+  }
+}
+
+/* Focus states for keyboard navigation */
+.userButton:focus-visible {
+  outline: 2px solid var(--primary-red);
+  outline-offset: 2px;
+}
+
+.userOption:focus-visible {
+  background: var(--primary-red-light);
+  color: var(--primary-red);
+  outline: 2px solid var(--primary-red);
+  outline-offset: -2px;
+}
+
+.loginLink:focus-visible {
+  outline: 2px solid var(--background-primary);
+  outline-offset: 2px;
 }
