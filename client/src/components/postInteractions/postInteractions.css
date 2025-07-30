@@ -25,7 +25,7 @@
   bottom: 0;
   background: linear-gradient(
     135deg,
-    rgba(230, 0, 35, 0.05) 0%,
+    rgba(37, 99, 235, 0.05) 0%,
     transparent 50%,
     rgba(255, 255, 255, 0.1) 100%
   );
@@ -76,7 +76,7 @@
   bottom: 0;
   background: radial-gradient(
     circle at center,
-    var(--primary-red-light) 0%,
+    var(--primary-blue-light) 0%,
     transparent 70%
   );
   opacity: 0;
@@ -104,7 +104,7 @@
 }
 
 .interactionIcons svg:hover {
-  filter: drop-shadow(0 4px 8px rgba(230, 0, 35, 0.3));
+  filter: drop-shadow(0 4px 8px rgba(37, 99, 235, 0.3));
 }
 
 .interactionIcons img {
@@ -120,8 +120,8 @@
 .postInteractions button {
   background: linear-gradient(
     135deg,
-    var(--primary-red) 0%,
-    var(--primary-red-hover) 100%
+    var(--primary-blue) 0%,
+    var(--primary-blue-hover) 100%
   );
   color: white;
   border: none;
@@ -160,8 +160,8 @@
 .postInteractions button:hover {
   background: linear-gradient(
     135deg,
-    var(--primary-red-hover) 0%,
-    var(--primary-red-dark) 100%
+    var(--primary-blue-hover) 0%,
+    var(--primary-blue-dark) 100%
   );
   transform: translateY(-3px) scale(1.05);
   box-shadow: var(--shadow-colored);
@@ -181,8 +181,8 @@
 .postInteractions button:disabled:hover {
   background: linear-gradient(
     135deg,
-    var(--primary-red) 0%,
-    var(--primary-red-hover) 100%
+    var(--primary-blue) 0%,
+    var(--primary-blue-hover) 100%
   );
   transform: none;
   box-shadow: var(--shadow-md);
@@ -335,14 +335,14 @@
   }
   
   .postInteractions button {
-    border: 2px solid var(--primary-red-dark);
+    border: 2px solid var(--primary-blue-dark);
   }
 }
 
 /* Focus states */
 .interactionIcons img:focus-visible,
 .interactionIcons svg:focus-visible {
-  outline: 2px solid var(--primary-red);
+  outline: 2px solid var(--primary-blue);
   outline-offset: 2px;
 }
 

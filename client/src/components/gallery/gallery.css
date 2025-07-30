@@ -17,7 +17,7 @@
   bottom: -20px;
   background: radial-gradient(
     circle at 20% 50%,
-    var(--primary-red-light) 0%,
+    var(--primary-blue-light) 0%,
     transparent 50%
   ),
   radial-gradient(
@@ -187,7 +187,7 @@
   background: linear-gradient(
     135deg,
     var(--text-primary) 0%,
-    var(--primary-red) 100%
+    var(--primary-blue) 100%
   );
   -webkit-background-clip: text;
   -webkit-text-fill-color: transparent;

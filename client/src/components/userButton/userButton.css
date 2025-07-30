@@ -50,8 +50,8 @@
 }
 
 .userButton:hover img {
-  border-color: var(--primary-red);
-  box-shadow: 0 0 0 3px var(--primary-red-light), var(--shadow-md);
+  border-color: var(--primary-blue);
+  box-shadow: 0 0 0 3px var(--primary-blue-light), var(--shadow-md);
   transform: scale(1.05);
 }
 
@@ -146,7 +146,7 @@
   background: linear-gradient(
     90deg,
     transparent,
-    var(--primary-red-light),
+    var(--primary-blue-light),
     transparent
   );
   transition: left var(--transition-normal);
@@ -159,16 +159,16 @@
 .userOption:hover {
   background: linear-gradient(
     135deg,
-    var(--primary-red-light) 0%,
+    var(--primary-blue-light) 0%,
     var(--background-secondary) 100%
   );
-  color: var(--primary-red);
+  color: var(--primary-blue);
   transform: translateX(4px);
 }
 
 .userOption:active {
   transform: translateX(2px);
-  background: var(--primary-red-light);
+  background: var(--primary-blue-light);
 }
 
 .loginLink {
@@ -178,8 +178,8 @@
   border-radius: var(--radius-2xl);
   background: linear-gradient(
     135deg,
-    var(--primary-red) 0%,
-    var(--primary-red-hover) 100%
+    var(--primary-blue) 0%,
+    var(--primary-blue-hover) 100%
   );
   color: white;
   transition: all var(--transition-normal);
@@ -212,8 +212,8 @@
 .loginLink:hover {
   background: linear-gradient(
     135deg,
-    var(--primary-red-hover) 0%,
-    var(--primary-red-dark) 100%
+    var(--primary-blue-hover) 0%,
+    var(--primary-blue-dark) 100%
   );
   transform: translateY(-3px);
   box-shadow: var(--shadow-colored);
@@ -341,20 +341,20 @@
   }
   
   .loginLink {
-    border: 2px solid var(--primary-red-dark);
+    border: 2px solid var(--primary-blue-dark);
   }
 }
 
 /* Focus states for keyboard navigation */
 .userButton:focus-visible {
-  outline: 2px solid var(--primary-red);
+  outline: 2px solid var(--primary-blue);
   outline-offset: 2px;
 }
 
 .userOption:focus-visible {
-  background: var(--primary-red-light);
-  color: var(--primary-red);
-  outline: 2px solid var(--primary-red);
+  background: var(--primary-blue-light);
+  color: var(--primary-blue);
+  outline: 2px solid var(--primary-blue);
   outline-offset: -2px;
 }
 

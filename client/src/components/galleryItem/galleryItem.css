@@ -19,7 +19,7 @@
   bottom: 0;
   background: linear-gradient(
     135deg,
-    rgba(230, 0, 35, 0.05) 0%,
+    rgba(37, 99, 235, 0.05) 0%,
     transparent 50%,
     rgba(0, 0, 0, 0.05) 100%
   );
@@ -36,7 +36,7 @@
 .galleryItem:hover {
   transform: translateY(-6px) scale(1.02);
   box-shadow: var(--shadow-xl);
-  border-color: var(--primary-red-light);
+  border-color: var(--primary-blue-light);
 }
 
 .galleryItem img {
@@ -95,8 +95,8 @@
   display: block;
   background: linear-gradient(
     135deg,
-    var(--primary-red) 0%,
-    var(--primary-red-hover) 100%
+    var(--primary-blue) 0%,
+    var(--primary-blue-hover) 100%
   );
   color: white;
   border-radius: var(--radius-2xl);
@@ -132,8 +132,8 @@
 .galleryItem:hover .saveButton:hover {
   background: linear-gradient(
     135deg,
-    var(--primary-red-hover) 0%,
-    var(--primary-red-dark) 100%
+    var(--primary-blue-hover) 0%,
+    var(--primary-blue-dark) 100%
   );
   transform: translateY(-3px) scale(1.05);
   box-shadow: var(--shadow-colored);
@@ -215,7 +215,7 @@
   background: var(--background-primary);
   transform: translateY(-3px) scale(1.15);
   box-shadow: var(--shadow-lg);
-  border-color: var(--primary-red-light);
+  border-color: var(--primary-blue-light);
 }
 
 .overlayIcons button:hover img {
@@ -230,7 +230,7 @@
 
 /* Enhanced focus states */
 .galleryItem:focus-within {
-  outline: 2px solid var(--primary-red);
+  outline: 2px solid var(--primary-blue);
   outline-offset: 2px;
 }
 
@@ -369,7 +369,7 @@
   }
   
   .saveButton {
-    border: 2px solid var(--primary-red-dark);
+    border: 2px solid var(--primary-blue-dark);
   }
   
   .overlayIcons button {

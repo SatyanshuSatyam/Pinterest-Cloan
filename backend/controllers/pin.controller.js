@@ -8,36 +8,47 @@ import Imagekit from "imagekit";
 import jwt from "jsonwebtoken";
 
 export const getPins = async (req, res) => {
-  const pageNumber = Number(req.query.cursor) || 0;
-  const search = req.query.search;
-  const userId = req.query.userId;
-  const boardId = req.query.boardId;
-  const LIMIT = 21;
+  try {
+    const pageNumber = Number(req.query.cursor) || 0;
+    const search = req.query.search;
+    const userId = req.query.userId;
+    const boardId = req.query.boardId;
+    const LIMIT = 21;
 
-  const pins = await Pin.find(
-    search
-      ? {
-          $or: [
-            { title: { $regex: search, $options: "i" } },
-            { tags: { $in: [search] } },
-          ],
-        }
-      : userId
-      ? { user: userId }
-      : boardId
-      ? { board: boardId }
-      : {}
-  )
-    .limit(LIMIT)
-    .skip(pageNumber * LIMIT);
+    let query = {};
+    
+    if (search) {
+      query = {
+        $or: [
+          { title: { $regex: search, $options: "i" } },
+          { tags: { $in: [search] } },
+        ],
+      };
+    } else if (userId) {
+      query = { user: userId };
+    } else if (boardId) {
+      query = { board: boardId };
+    }
 
-  const hasNextPage = pins.length === LIMIT;
+    const pins = await Pin.find(query)
+      .limit(LIMIT)
+      .skip(pageNumber * LIMIT)
+      .populate("user", "username img displayName")
+      .sort({ createdAt: -1 });
 
-  // await new Promise((resolve) => setTimeout(resolve, 3000));
+    const hasNextPage = pins.length === LIMIT;
 
-  res
-    .status(200)
-    .json({ pins, nextCursor: hasNextPage ? pageNumber + 1 : null });
+    res.status(200).json({ 
+      pins, 
+      nextCursor: hasNextPage ? pageNumber + 1 : null 
+    });
+  } catch (error) {
+    console.error("Error fetching pins:", error);
+    res.status(500).json({ 
+      message: "Failed to fetch pins", 
+      error: error.message 
+    });
+  }
 };
 
 export const getPin = async (req, res) => {
